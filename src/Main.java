@@ -9,9 +9,16 @@ public class Main {
 		
 		// maxSpeed, acceleration, total distance
 		VelocityTrapezoid vt = new VelocityTrapezoid (1D, 0.1D, 100D);
+		DistanceCurve dc = new DistanceCurve (vt);
+		
+		// currentVelocity, time
+		//System.out.println(vt.getError(0D, 110D));
+		
+		// leftSide distance, rightSide distance
+		//System.out.println (MotorSync.getDistanceError(100D, 90D));
 		
 		// currentDistance, time
-		System.out.println(vt.getError( 6.4D, 8D));
+		System.out.println(dc.getError( 5D, 10D));
 		
 	}
 

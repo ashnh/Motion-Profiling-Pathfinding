@@ -1,72 +1,31 @@
 
-public class VelocityTrapezoid {
-
-	private double maxSpeed;
-	private double accelerationSlope;
-	private double distance;
-	private double accelerationTime;
-	private double expectedTime;
+public class VelocityTrapezoid extends MotionProfile {
 	
-	public VelocityTrapezoid(double _maxSpeed, double _accelerationSlope, double _distance) {
+	public VelocityTrapezoid(double _maxSpeed, double _acceleration, double _distance) {
 		
-		maxSpeed = _maxSpeed;
-		accelerationSlope = _accelerationSlope;
-		accelerationTime = maxSpeed / accelerationSlope;
-		distance = _distance;
-		expectedTime = ((distance - (accelerationSlope * Math.pow(accelerationTime, 2))) / maxSpeed) + (2* accelerationTime);
+		super (_maxSpeed, _acceleration, _distance);
 		
-		// Dm = D - 2De
-		// De = .5 * a(te^2)
-		// Dm = D - 2(.5 * a(te^2))
-		// Dm = Vm * tm
-		// Vm * tm = D - a(te^2)
-		// tm = (D - a(te^2)) / Vm
-		// total time = tm + 2te
-		
-		
-		// total time = (D - a(te^2)) / Vm + 2te
 		
 	}
 	
-	public VelocityTrapezoid (double _distance) {
+	public double getError (double currentVelocity, double time) {
 		
-		maxSpeed = 1D; // d / t
-		accelerationSlope = .1D; // d / t^2
-		accelerationTime = 10D; // t
-		distance = _distance; // d
-		
-	}
-	
-	
-	public double getError ( double currentDistance, double time) {
-		
-		if (time == 0d)
+		if (time == 0D)
 			return -131D;
-		
-		double currentVelocity = currentDistance / time;
 		
 		double expectedVelocity = 0D;
 		
-		if (currentDistance < distance - (accelerationTime * maxSpeed))
-			expectedVelocity = accelerationSlope * time;
-		 else 
-			expectedVelocity = (expectedTime - time) * accelerationSlope;
-		
-		expectedVelocity = (expectedVelocity > maxSpeed) ? maxSpeed : expectedVelocity;
+		if (time < expectedTime - timeToAccelerate) {
+			
+			if (time < timeToAccelerate)
+				expectedVelocity = acceleration * time;
+			else
+				expectedVelocity = maxSpeed;
+			
+		}else 
+			expectedVelocity = (expectedTime - time) * acceleration;
 		
 		return (currentVelocity - expectedVelocity) / expectedVelocity;
 		
-	}
-	
-	public double getMaxSpeed () {
-		return maxSpeed;
-	}
-
-	public double getAccelerationSlope () {
-		return accelerationSlope;
-	}
-	
-	public double getDistance () {
-		return distance;
 	}
 }

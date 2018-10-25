@@ -18,7 +18,7 @@ public class Main {
 		//System.out.println (MotorSync.getDistanceError(100D, 90D));
 		
 		// currentDistance, time
-		System.out.println(dc.getError( 5D, 10D));
+		System.out.println(dc.getError( 95D, 100D));
 		
 	}
 

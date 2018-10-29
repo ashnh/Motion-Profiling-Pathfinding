@@ -1,3 +1,4 @@
+package profiles;
 
 public class VelocityTrapezoid extends MotionProfile {
 	

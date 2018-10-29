@@ -1,3 +1,4 @@
+package profiles;
 
 public class DistanceCurve extends MotionProfile {
 	

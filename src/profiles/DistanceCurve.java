@@ -29,8 +29,17 @@ public class DistanceCurve extends MotionProfile {
 	// current distance, time
 	public double getError (double currentDistance, double time) {
 		
+		
+		double expectedDistance = getExpectedDistance (currentDistance, time);
+		
+		return (currentDistance - expectedDistance) / expectedDistance;
+		
+	}
+	
+	public double getExpectedDistance (double currentDistance, double time) {
+
 		if (time == 0D)
-			return -131D;
+			return 0D;
 		
 		double expectedDistance;
 		
@@ -57,7 +66,8 @@ public class DistanceCurve extends MotionProfile {
 			}
 			
 		}
-		return (currentDistance - expectedDistance) / expectedDistance;
+		
+		return expectedDistance;
 		
 	}
 

@@ -5,8 +5,6 @@ import profiles.VelocityTrapezoid;
 
 public class Main {
 
-	public static final double Inches_Per_Second_Of_Power = 12; 
-
 	public static void main(String[] args) {
 		
 		Drive drive = new Drive ();
@@ -22,7 +20,8 @@ public class Main {
 		//System.out.println (MotorSync.getDistanceError(100D, 90D));
 		
 		// currentDistance, time
-		System.out.println(dc.getError( 95D, 100D));
+		//System.out.println(dc.getError( 95D, 100D));
+		
 		
 	}
 

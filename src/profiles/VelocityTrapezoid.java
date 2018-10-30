@@ -11,8 +11,16 @@ public class VelocityTrapezoid extends MotionProfile {
 	
 	public double getError (double currentVelocity, double time) {
 		
+		double expectedVelocity = getExpectedVelocity (currentVelocity, time);
+		
+		return (currentVelocity - expectedVelocity) / expectedVelocity;
+		
+	}
+	
+	public double getExpectedVelocity (double currentVelocity, double time) {
+
 		if (time == 0D)
-			return -131D;
+			return 0D;
 		
 		double expectedVelocity = 0D;
 		
@@ -25,8 +33,6 @@ public class VelocityTrapezoid extends MotionProfile {
 			
 		}else 
 			expectedVelocity = (expectedTime - time) * acceleration;
-		
-		return (currentVelocity - expectedVelocity) / expectedVelocity;
-		
+		return expectedVelocity;
 	}
 }

@@ -1,7 +1,9 @@
+package Main;
+import drive.Drive;
+import profiles.DistanceCurve;
+import profiles.VelocityTrapezoid;
 
 public class Main {
-
-	public static final double Inches_Per_Second_Of_Power = 12; 
 
 	public static void main(String[] args) {
 		
@@ -18,7 +20,6 @@ public class Main {
 		//System.out.println (MotorSync.getDistanceError(100D, 90D));
 		
 		// currentDistance, time
-		System.out.println(dc.getError( 15D, 20D));
 		
 	}
 

@@ -1,13 +1,15 @@
+package profiles;
 
 public class DistanceCurve extends MotionProfile {
 	
 	private double accelerationDistance;
+	private double coastingDistance;
 
 	public DistanceCurve(VelocityTrapezoid vc) {
 		
 		super (vc.getMaxSpeed(), vc.getAccelerationConstant(), vc.getDistance());
 		
-		accelerationDistance = 0.5 * acceleration * Math.pow(timeToAccelerate, 2D);
+		distanceValues();
 		
 	}
 	
@@ -15,13 +17,29 @@ public class DistanceCurve extends MotionProfile {
 		
 		super (_maxSpeed, _acceleration, _distance);
 		
+		distanceValues();
+		
+	}
+	
+	private void distanceValues() {
+		accelerationDistance = 0.5 * acceleration * Math.pow(timeToAccelerate, 2D);
+		coastingDistance = maxSpeed * (expectedTime - (2*timeToAccelerate));
 	}
 	
 	// current distance, time
 	public double getError (double currentDistance, double time) {
 		
+		
+		double expectedDistance = getExpectedDistance (currentDistance, time);
+		
+		return (currentDistance - expectedDistance) / expectedDistance;
+		
+	}
+	
+	public double getExpectedDistance (double currentDistance, double time) {
+
 		if (time == 0D)
-			return -131D;
+			return 0D;
 		
 		double expectedDistance;
 		
@@ -38,17 +56,17 @@ public class DistanceCurve extends MotionProfile {
 				expectedDistance =  accelerationDistance + (maxSpeed * (time - timeToAccelerate));
 				
 			} else {
-				
+				double deccelerationTime = (time - (expectedTime - timeToAccelerate));
 				//delta x = acclerationDistance + (V * (expectedTime - 2timeToAccelerate)) + (maxSpeed(t) - .5at^2)
-				expectedDistance = accelerationDistance + 
-						(maxSpeed * (expectedTime - (2*timeToAccelerate))) + 
-						((maxSpeed * time) - (0.5 * acceleration * Math.pow(time, 2D)));
+				expectedDistance = 	accelerationDistance + 
+									coastingDistance + 
+									((maxSpeed * deccelerationTime) -
+									(0.5 * acceleration * Math.pow(deccelerationTime, 2D)));
 				
 			}
 			
 		}
-		System.out.println(expectedTime);
-		return (currentDistance - expectedDistance) / expectedDistance;
+		return expectedDistance;
 		
 	}
 

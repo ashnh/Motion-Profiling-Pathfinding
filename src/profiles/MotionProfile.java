@@ -1,3 +1,4 @@
+package profiles;
 
 public abstract class MotionProfile {
 

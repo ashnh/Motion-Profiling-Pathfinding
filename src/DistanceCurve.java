@@ -7,7 +7,7 @@ public class DistanceCurve extends MotionProfile {
 		
 		super (vc.getMaxSpeed(), vc.getAccelerationConstant(), vc.getDistance());
 		
-		accelerationDistance = 0.5 * acceleration * timeToAccelerate;
+		accelerationDistance = 0.5 * acceleration * Math.pow(timeToAccelerate, 2D);
 		
 	}
 	
@@ -47,7 +47,7 @@ public class DistanceCurve extends MotionProfile {
 			}
 			
 		}
-		
+		System.out.println(expectedTime);
 		return (currentDistance - expectedDistance) / expectedDistance;
 		
 	}

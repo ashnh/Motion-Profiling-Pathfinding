@@ -2,10 +2,13 @@ package profiles;
 
 public class VelocityTrapezoid extends MotionProfile {
 	
+	private double preDeccelerationValue;
+	
 	public VelocityTrapezoid(double _maxSpeed, double _acceleration, double _distance) {
 		
 		super (_maxSpeed, _acceleration, _distance);
 		
+		preDeccelerationValue = 0D;
 		
 	}
 	
@@ -34,8 +37,13 @@ public class VelocityTrapezoid extends MotionProfile {
 			else
 				expectedVelocity = maxSpeed;
 			
-		}else 
-			expectedVelocity = (expectedTime - time) * acceleration;
+			preDeccelerationValue = expectedVelocity;
+			
+		} else {
+			expectedVelocity = preDeccelerationValue
+					- ((time - expectedTime + timeToAccelerate) * acceleration);
+		}
+		
 		return expectedVelocity;
 	}
 }

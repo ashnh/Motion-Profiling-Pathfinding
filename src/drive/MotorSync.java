@@ -8,9 +8,9 @@ public class MotorSync {
 		
 	}
 	
-	public static double getDistanceError (double leftSide, double rightSide) {
+	public static double getDistanceError (double leftSide, double leftExpected, double rightSide, double rightExpected) {
 		
-		return (rightSide - leftSide) / rightSide;
+		return (rightSide - rightExpected - leftSide + leftExpected) / (rightSide - rightExpected);
 		
 	}
 

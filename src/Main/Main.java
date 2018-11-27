@@ -22,31 +22,7 @@ public class Main {
 		
 		// currentDistance, time
 		
-		System.out.println ("expected time: " + vt.getExpectedTime());
-		double time = 0D;
-		double currentVelocity = 0D;
-		while (Math.abs(drive.getLeft().getEncoderState()) < 200D && time < vt.getExpectedTime()) {
-			
-			double error = vt.getError(currentVelocity, time);
-			error = (error > 1D) ? 1D : error;
-			error = (error < -1D) ? -1D : error;
-			
-			currentVelocity += (vt.getExpectedVelocity(time) 
-					* -vt.getError(currentVelocity, time));
-			
-			if (Math.abs(currentVelocity) > vt.getMaxSpeed())
-				currentVelocity = (Math.abs(currentVelocity) / currentVelocity) ;
-			
-			drive.getLeft().setPower(currentVelocity / 12);
-			
-			System.out.println("Distance: " + drive.getLeft().getEncoderState() 
-					+ "\tcurrent velocity: " + currentVelocity
-					+ "\texpected velocity: " + vt.getExpectedVelocity(time)
-					+ "\tError: " + error + "\ttime: " + time);
-			
-			time++; 
-			
-		}
+		
 		
 	}
 
